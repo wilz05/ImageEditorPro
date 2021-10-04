@@ -253,58 +253,11 @@ class _ImageEditorProState extends State<ImageEditorPro> {
         key: scaf,
         appBar: AppBar(
           actions: <Widget>[
-            Icon(FontAwesomeIcons.boxes).xIconButton(onPressed: () {
-              showCupertinoDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: 'Select Height Width'.text(),
-                      actions: <Widget>[
-                        () {
-                          setState(() {
-                            height = int.parse(heightcontroler.text);
-                            width = int.parse(widthcontroler.text);
-                          });
-                          heightcontroler.clear();
-                          widthcontroler.clear();
-                          Navigator.pop(context);
-                        }.xFlatButton(child: 'Done'.text()),
-                      ],
-                      content: SingleChildScrollView(
-                        child: xColumnSS.list(
-                          [
-                            'Define Height'.text(),
-                            10.0.sizedHeight(),
-                            TextField(
-                                controller: heightcontroler,
-                                keyboardType: TextInputType.numberWithOptions(),
-                                decoration: InputDecoration(
-                                    hintText: 'Height',
-                                    contentPadding: EdgeInsets.only(left: 10),
-                                    border: OutlineInputBorder())),
-                            10.0.sizedHeight(),
-                            'Define Width'.text(),
-                            10.0.sizedHeight(),
-                            TextField(
-                                controller: widthcontroler,
-                                keyboardType: TextInputType.numberWithOptions(),
-                                decoration: InputDecoration(
-                                    hintText: 'Width',
-                                    contentPadding: EdgeInsets.only(left: 10),
-                                    border: OutlineInputBorder())),
-                          ],
-                        ),
-                      ),
-                    );
-                  });
-            }),
             Icon(Icons.clear).xIconButton(onPressed: () {
               _controller.points.clear();
               setState(() {});
             }),
-            Icon(Icons.camera_alt).xIconButton(onPressed: () {
-              bottomsheets();
-            }),
+
             'Save'.text().xFlatButton(
                 primary: Colors.white,
                 onPressed: () {
@@ -333,7 +286,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 <Widget>[
                   BottomBarContainer(
                     colors: widget.bottomBarColor!,
-                    icons: FontAwesomeIcons.brush,
+                    icons: FontAwesomeIcons.paintBrush,
                     ontap: () {
                       // raise the [showDialog] widget
                       showDialog(
@@ -380,7 +333,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     },
                     title: 'Text',
                   ),
-                  BottomBarContainer(
+                  _image != null ? BottomBarContainer(
                     colors: widget.bottomBarColor!,
                     icons: Icons.flip,
                     ontap: () {
@@ -389,7 +342,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                       });
                     },
                     title: 'Flip',
-                  ),
+                  ) : Container(),
                   BottomBarContainer(
                     colors: widget.bottomBarColor!,
                     icons: Icons.rotate_left,
@@ -410,244 +363,40 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     },
                     title: 'Rotate right',
                   ),
-                  BottomBarContainer(
-                    colors: widget.bottomBarColor!,
-                    icons: Icons.blur_on,
-                    ontap: () {
-                      showModalBottomSheet(
-                        shape: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)).xShapeBorder(),
-                        context: context,
-                        builder: (context) {
-                          return StatefulBuilder(
-                            builder: (context, setS) {
-                              return xColumn.list(
-                                [
-                                  'Slider Filter Color'.toUpperCase().xTextColorWhite().toCenter(),
-                                  Divider(
 
-                                      // height: 1,
-                                      ),
-                                  20.0.sizedHeight(),
-                                  'Slider Color'.xTextColorWhite(),
-                                  //   10.0.sizedHeight(),
-                                  xRowCC.list([
-                                    BarColorPicker(
-                                        width: 300,
-                                        thumbColor: Colors.white,
-                                        cornerRadius: 10,
-                                        pickMode: PickMode.Color,
-                                        colorListener: (int value) {
-                                          setS(() {
-                                            setState(() {
-                                              colorValue = Color(value);
-                                            });
-                                          });
-                                        }).xExpanded(),
-                                    'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                      setState(() {
-                                        setS(() {
-                                          colorValue = Colors.transparent;
-                                        });
-                                      });
-                                    })
-                                  ]),
-                                  5.0.sizedHeight(),
-                                  'Slider Blur'.xTextColorWhite(),
-                                  10.0.sizedHeight(),
-                                  xRow.list([
-                                    Slider(
-                                        activeColor: Colors.white,
-                                        inactiveColor: Colors.grey,
-                                        value: blurValue,
-                                        min: 0.0,
-                                        max: 10.0,
-                                        onChanged: (v) {
-                                          setS(() {
-                                            setState(() {
-                                              blurValue = v;
-                                            });
-                                          });
-                                        }).xExpanded(),
-                                    'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                      setS(() {
-                                        setState(() {
-                                          blurValue = 0.0;
-                                        });
-                                      });
-                                    })
-                                  ]),
-                                  5.0.sizedHeight(),
-                                  'Slider Opacity'.xTextColorWhite(),
-                                  10.0.sizedHeight(),
-                                  xRow.list([
-                                    Slider(
-                                        activeColor: Colors.white,
-                                        inactiveColor: Colors.grey,
-                                        value: opacityValue,
-                                        min: 0.00,
-                                        max: 1.0,
-                                        onChanged: (v) {
-                                          setS(() {
-                                            setState(() {
-                                              opacityValue = v;
-                                            });
-                                          });
-                                        }).xExpanded(),
-                                    'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                      setS(() {
-                                        setState(() {
-                                          opacityValue = 0.0;
-                                        });
-                                      });
-                                    })
-                                  ]),
-                                ],
-                              ).toContainer(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
-                                padding: EdgeInsets.all(20),
-                                height: 400,
-                                color: Colors.black87,
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
-                    title: 'Blur',
-                  ),
                   BottomBarContainer(
                     colors: widget.bottomBarColor!,
                     icons: FontAwesomeIcons.eraser,
                     ontap: () {
                       _controller.clear();
-                      //  type.clear();
-                      // // fontsize.clear();
-                      //  offsets.clear();
-                      // // multiwidget.clear();
+                      ;
                       howmuchwidgetis = 0;
                     },
                     title: 'Eraser',
                   ),
-                  BottomBarContainer(
-                    colors: widget.bottomBarColor!,
-                    icons: Icons.photo,
-                    ontap: () {
-                      showModalBottomSheet(
-                          shape:
-                              BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)).xShapeBorder(),
-                          context: context,
-                          builder: (context) {
-                            return StatefulBuilder(
-                              builder: (context, setS) {
-                                return xColumnCC.list([
-                                  5.0.sizedHeight(),
-                                  'Slider Hue'.xTextColorWhite(),
-                                  10.0.sizedHeight(),
-                                  xRow.list([
-                                    Slider(
-                                        activeColor: Colors.white,
-                                        inactiveColor: Colors.grey,
-                                        value: hueValue,
-                                        min: -10.0,
-                                        max: 10.0,
-                                        onChanged: (v) {
-                                          setS(() {
-                                            setState(() {
-                                              hueValue = v;
-                                            });
-                                          });
-                                        }).xExpanded(),
-                                    'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                      setS(() {
-                                        setState(() {
-                                          blurValue = 0.0;
-                                        });
-                                      });
-                                    })
-                                  ]),
-                                  5.0.sizedHeight(),
-                                  'Slider Saturation'.xTextColorWhite(),
-                                  10.0.sizedHeight(),
-                                  xRow.list([
-                                    Slider(
-                                        activeColor: Colors.white,
-                                        inactiveColor: Colors.grey,
-                                        value: saturationValue,
-                                        min: -10.0,
-                                        max: 10.0,
-                                        onChanged: (v) {
-                                          setS(() {
-                                            setState(() {
-                                              saturationValue = v;
-                                            });
-                                          });
-                                        }).xExpanded(),
-                                    'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                      setS(() {
-                                        setState(() {
-                                          saturationValue = 0.0;
-                                        });
-                                      });
-                                    })
-                                  ]),
-                                  5.0.sizedHeight(),
-                                  'Slider Brightness'.xTextColorWhite(),
-                                  10.0.sizedHeight(),
-                                  xRow.list([
-                                    Slider(
-                                        activeColor: Colors.white,
-                                        inactiveColor: Colors.grey,
-                                        value: brightnessValue,
-                                        min: 0.0,
-                                        max: 1.0,
-                                        onChanged: (v) {
-                                          setS(() {
-                                            setState(() {
-                                              brightnessValue = v;
-                                            });
-                                          });
-                                        }).xExpanded(),
-                                    'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                      setS(() {
-                                        setState(() {
-                                          brightnessValue = 0.0;
-                                        });
-                                      });
-                                    })
-                                  ])
-                                ]);
-                              },
-                            ).xContainer(
-                                color: Colors.black87,
-                                height: 300,
-                                borderRadius:
-                                    BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)));
-                          });
-                    },
-                    title: 'Filter',
-                  ),
-                  BottomBarContainer(
-                    colors: widget.bottomBarColor!,
-                    icons: FontAwesomeIcons.smile,
-                    ontap: () {
-                      var getemojis = showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Emojies();
-                          });
-                      getemojis.then((value) {
-                        if (value['name'] != null) {
-                          type.add(1);
-                          widgetJson.add(value);
-                          //    fontsize.add(20);
-                          offsets.add(Offset.zero);
-                          //  multiwidget.add(value);
-                          howmuchwidgetis++;
-                        }
-                      });
-                    },
-                    title: 'Emoji',
-                  ),
+
+                  // BottomBarContainer(
+                  //   colors: widget.bottomBarColor!,
+                  //   icons: FontAwesomeIcons.smile,
+                  //   ontap: () {
+                  //     var getemojis = showModalBottomSheet(
+                  //         context: context,
+                  //         builder: (BuildContext context) {
+                  //           return Emojies();
+                  //         });
+                  //     getemojis.then((value) {
+                  //       if (value['name'] != null) {
+                  //         type.add(1);
+                  //         widgetJson.add(value);
+                  //         //    fontsize.add(20);
+                  //         offsets.add(Offset.zero);
+                  //         //  multiwidget.add(value);
+                  //         howmuchwidgetis++;
+                  //       }
+                  //     });
+                  //   },
+                  //   title: 'Emoji',
+                  // ),
                 ],
               ).xContainer(
                 padding: EdgeInsets.all(0.0),
@@ -658,66 +407,6 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   }
 
   final picker = ImagePicker();
-
-  void bottomsheets() {
-    openbottomsheet = true;
-    setState(() {});
-    var future = showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return xColumn.list(
-          [
-            'Select Image Options'.text().xCenter(),
-            10.0.sizedHeight(),
-            Divider(
-              height: 1,
-            ),
-            xRowCC.list(
-              [
-                xColumnCC.list(
-                  [Icon(Icons.photo_library).xIconButton(), 10.0.sizedWidth(), 'Open Gallery'.text()],
-                ).xContainer(
-                  onTap: () async {
-                    var image = await picker.getImage(source: ImageSource.gallery);
-                    await loadImage(File(image!.path));
-                    Navigator.pop(context);
-                  },
-                ),
-                24.0.sizedWidth(),
-                xColumnCC.list(
-                  [
-                    Icon(Icons.camera_alt).xIconButton(),
-                    10.0.sizedWidth(),
-                    'Open Camera'.text(),
-                  ],
-                ).xContainer(onTap: () async {
-                  var image = await picker.getImage(source: ImageSource.camera);
-                  var decodedImage = await decodeImageFromList(File(image!.path).readAsBytesSync());
-
-                  setState(() {
-                    height = decodedImage.height;
-                    width = decodedImage.width;
-                    _image = File(image.path);
-                  });
-                  setState(() => _controller.clear());
-                  Navigator.pop(context);
-                })
-              ],
-            ).xContainer(
-              padding: EdgeInsets.all(20),
-            )
-          ],
-        ).xContainer(
-          padding: EdgeInsets.all(0.0),
-          color: Colors.white,
-          //   blurRadius: 10.9,
-          //shadowColor: Colors.grey[400],
-          height: 170,
-        );
-      },
-    );
-    future.then((void value) => _closeModal(value));
-  }
 
   Future<void> loadImage(File? imageFile) async {
     final decodedImage = await decodeImageFromList(imageFile!.readAsBytesSync());

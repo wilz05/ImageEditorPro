@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             _image = geteditimage;
           });
+          print('_image : ${_image.path}.');
         }
       }).catchError((er) {
         print(er);
