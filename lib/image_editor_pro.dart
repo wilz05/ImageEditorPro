@@ -267,7 +267,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     final paths = widget.pathSave ?? await getTemporaryDirectory();
 
                     final file = await File('${paths.path}/' + DateTime.now().toString() + '.jpg').create();
-                    file.writeAsBytesSync(binaryIntList);
+                    file.writeAsBytesSync(binaryIntList!);
                     Navigator.pop(context, file);
                   }).catchError((onError) {
                     print(onError);

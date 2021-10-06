@@ -400,7 +400,7 @@ packages:
       name: screenshot
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "1.2.3"
   signature:
     dependency: transitive
     description:
