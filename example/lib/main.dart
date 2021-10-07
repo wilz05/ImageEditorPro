@@ -21,8 +21,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controllerDefaultImage = TextEditingController();
-  File _defaultImage;
-  File _image;
+  File? _defaultImage;
+  File? _image;
 
   Future<void> getimageditor() => Navigator.push(context, MaterialPageRoute(builder: (context) {
         return ImageEditorPro(
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                       final imageGallery = await ImagePicker().getImage(source: ImageSource.gallery);
                       if (imageGallery != null) {
                         _defaultImage = File(imageGallery.path);
-                        setState(() => controllerDefaultImage.text = _defaultImage.path);
+                        setState(() => controllerDefaultImage.text = _defaultImage!.path);
                       }
                     },
                   ),
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 ])
                 .xCenter()
                 .xap(value: 16),
-            isFalse: _image == null ? Container() : Image.file(_image).toCenter())
+            isFalse: _image == null ? Container() : Image.file(_image!).toCenter())
         .xScaffold(
       appBar: 'Image Editor Pro example'.xTextColorWhite().xAppBar(),
       floatingActionButton: Icons.add.xIcons().xFloationActiobButton(
@@ -86,6 +86,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget condition({bool condtion, Widget isTrue, Widget isFalse}) {
-  return condtion ? isTrue : isFalse;
+Widget condition({bool? condtion, Widget? isTrue, Widget? isFalse}) {
+  return condtion! ? isTrue! : isFalse!;
 }
