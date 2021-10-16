@@ -19,7 +19,10 @@ dependencies:
   screenshot: ^1.2.3
   signature: ^4.0.2
   flutter_colorpicker: ^0.4.0
-  firexcode: ^1.0.5
+  firexcode:
+    git:
+      url: https://github.com/VivekMakwana7/FireXcode-master.git
+      ref: main
 
   flutter_web_plugins:
     sdk: flutter

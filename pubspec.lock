@@ -7,14 +7,14 @@ packages:
       name: _fe_analyzer_shared
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "18.0.0"
+    version: "22.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.7.1"
   animated_interpolation:
     dependency: transitive
     description:
@@ -151,10 +151,12 @@ packages:
   firexcode:
     dependency: "direct main"
     description:
-      name: firexcode
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
+      path: "."
+      ref: main
+      resolved-ref: a1706548de1aaeaf8671759b9ffb4ab307edf4ef
+      url: "https://github.com/VivekMakwana7/FireXcode-master.git"
+    source: git
+    version: "1.0.8"
   flutter:
     dependency: "direct main"
     description: flutter
