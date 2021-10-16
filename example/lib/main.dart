@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 .xap(value: 16),
             isFalse: _image == null ? Container() : Image.file(_image!).toCenter())
         .xScaffold(
-      appBar: 'Image Editor Pro example'.xTextColorWhite().xAppBar(),
+      appBar: 'Image Editor Pro example'.xTextColorWhite().xAppBar(preferredSize: Size(15, 15)),
       floatingActionButton: Icons.add.xIcons().xFloationActiobButton(
             color: Colors.red,
             onTap: () {
