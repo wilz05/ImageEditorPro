@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:image_editor_pro/image_editor_pro.dart';
-import 'package:firexcode/firexcode.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firexcode/firexcode.dart';
 
 void main() {
   runApp(MyApp());
@@ -75,7 +75,6 @@ class _HomePageState extends State<HomePage> {
                 .xap(value: 16),
             isFalse: _image == null ? Container() : Image.file(_image!).toCenter())
         .xScaffold(
-      appBar: 'Image Editor Pro example'.xTextColorWhite().xAppBar(preferredSize: Size(15, 15)),
       floatingActionButton: Icons.add.xIcons().xFloationActiobButton(
             color: Colors.red,
             onTap: () {

@@ -70,7 +70,6 @@ class _TextEditorImageState extends State<TextEditorImage> {
             ]),
             xColumn.list([
               10.0.sizedHeight(),
-              'Size Adjust'.toUpperCase().xTextColorWhite().toCenter(),
               10.0.sizedHeight(),
               Slider(
                   activeColor: Colors.white,

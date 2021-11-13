@@ -18,9 +18,11 @@ packages:
   animated_interpolation:
     dependency: transitive
     description:
-      name: animated_interpolation
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: main
+      resolved-ref: cafd15f31ee86c3713d53212a0ca67cae990e1c6
+      url: "https://github.com/satish-zibma/animated_interpolation.git"
+    source: git
     version: "0.3.2"
   archive:
     dependency: transitive
@@ -153,8 +155,8 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: a1706548de1aaeaf8671759b9ffb4ab307edf4ef
-      url: "https://github.com/VivekMakwana7/FireXcode-master.git"
+      resolved-ref: ffe48f175758cd8cad5487ce761463b1c2cf14ff
+      url: "https://github.com/arpit-zibma/FireXcode.git"
     source: git
     version: "1.0.8"
   flutter:

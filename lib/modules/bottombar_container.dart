@@ -15,7 +15,6 @@ class BottomBarContainer extends StatelessWidget {
         .list([
           icons!.xIcons(color: Colors.white),
           4.0.sizedHeight(),
-          title!.xText(color: Colors.white)
         ])
         .xInkWell(onTap: ontap)
         .xMaterial(
