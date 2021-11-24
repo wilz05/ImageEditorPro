@@ -149,21 +149,21 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           transform: Matrix4.rotationY(flipValue),
                           child: ClipRect(
                             // <-- clips to the 200x200 [Container] below
-
-                            child: _image!.path.decorationIFToFitHeight().xContainer(
-                                padding: EdgeInsets.zero,
-                                // alignment: Alignment.center,
-                                width: width.toDouble(),
-                                height: height.toDouble(),
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                    sigmaX: blurValue,
-                                    sigmaY: blurValue,
-                                  ),
-                                  child: Container(
-                                    color: colorValue.withOpacity(opacityValue),
-                                  ),
-                                )),
+                          child: Center(child: Container(decoration: BoxDecoration(),child: Image.file(File(_image!.path),fit: BoxFit.cover),)),
+                            // child: _image!.path.decorationIFToFitHeight().xContainer(
+                            //     padding: EdgeInsets.zero,
+                            //     // alignment: Alignment.center,
+                            //     width: width.toDouble(),
+                            //     height: height.toDouble(),
+                            //     child: BackdropFilter(
+                            //       filter: ImageFilter.blur(
+                            //         sigmaX: blurValue,
+                            //         sigmaY: blurValue,
+                            //       ),
+                            //       child: Container(
+                            //         color: colorValue.withOpacity(opacityValue),
+                            //       ),
+                            //     )),
                           ),
                         )
 
