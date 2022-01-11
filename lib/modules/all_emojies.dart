@@ -26,9 +26,10 @@ class _EmojiesState extends State<Emojies> {
               children: emojis.map((String emoji) {
                 return GridTile(
                     child: emoji
-                        .xText(fontsize: 35)
+                        .xText(fontsize: 35, fontWeight: FontWeight.bold)
                         .xContainer(padding: EdgeInsets.zero)
                         .xGesture(onTap: () {
+                  print("emoji on tap");
                   Navigator.pop(context, {
                     'name': emoji,
                     'color': Colors.white,

@@ -3,6 +3,10 @@ import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_editor_pro/image_editor_pro.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firexcode/firexcode.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:zoom_widget/zoom_widget.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:extended_image/extended_image.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,10 +25,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ScreenshotController screenshotController = ScreenshotController();
   final controllerDefaultImage = TextEditingController();
   File? _defaultImage;
   File? _image;
-
+  var _height = 300.0;
+  var _width = 300.0;
   Future<void> getimageditor() =>
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return ImageEditorPro(
@@ -45,17 +51,45 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(_height);
+    print(_width);
     return condition(
             condtion: _image == null,
-            isTrue: XColumn(crossAxisAlignment: CrossAxisAlignment.center)
+            isTrue: XColumn(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch)
                 .list([
-                  TextField(
-                    controller: controllerDefaultImage,
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      hintText: 'No default image',
-                    ),
+                  Container(
+                    padding: EdgeInsets.all(0.0),
+                    child: Screenshot(
+                        controller: screenshotController,
+                        child: Container(
+                          padding: EdgeInsets.all(0.0),
+                          child: _defaultImage != null
+                              ? ExtendedImage.file(
+                                  _defaultImage!,
+                                  fit: BoxFit.contain,
+
+                                  //enableLoadState: false,
+                                  mode: ExtendedImageMode.gesture,
+                                  initGestureConfigHandler: (state) {
+                                    return GestureConfig(
+                                      minScale: 0.9,
+                                      animationMinScale: 0.7,
+                                      maxScale: 8.0,
+                                      animationMaxScale: 8.5,
+                                      speed: 1.0,
+                                      inertialSpeed: 100.0,
+                                      initialScale: 2.0,
+                                      inPageView: false,
+                                      initialAlignment: InitialAlignment.center,
+                                    );
+                                  },
+                                )
+                              : Center(
+                                  child: Text('invalid image '),
+                                ),
+                        )),
                   ),
                   16.0.sizedHeight(),
                   'Set Default Image'.text().xRaisedButton(
@@ -64,16 +98,38 @@ class _HomePageState extends State<HomePage> {
                           .pickImage(source: ImageSource.gallery);
                       if (imageGallery != null) {
                         _defaultImage = File(imageGallery.path);
+                        final decodedImage = await decodeImageFromList(
+                            _defaultImage!.readAsBytesSync());
+                        _height = decodedImage.height.toDouble();
+                        _width = decodedImage.width.toDouble();
+
                         setState(() =>
                             controllerDefaultImage.text = _defaultImage!.path);
                       }
                     },
                   ),
-                  'Open Editor'.text().xRaisedButton(
-                    onPressed: () {
+                  'Open Editor'.text().xRaisedButton(onPressed: () {
+                    screenshotController
+                        .capture(pixelRatio: 3.5 * 1.5)
+                        .then((binaryIntList) async {
+                      //print("Capture Done");
+
+                      final paths = await getTemporaryDirectory();
+
+                      final file = await File('${paths.path}/' +
+                              DateTime.now().toString() +
+                              '.jpg')
+                          .create();
+                      file.writeAsBytesSync(binaryIntList!);
+                      print("taking new print out ");
+                      _defaultImage = file;
+                    });
+                    if (_defaultImage == null) {
+                      return;
+                    } else {
                       getimageditor();
-                    },
-                  ),
+                    }
+                  }),
                 ])
                 .xCenter()
                 .xap(value: 16),

@@ -18,6 +18,8 @@ dependencies:
   dio: ^4.0.4
   screenshot: ^1.2.3
   signature: ^4.1.1 #lower version
+  extended_image: ^6.0.1
+
   flutter_colorpicker: ^0.6.0 # ^1.0.3
   firexcode:
     git:

@@ -14,6 +14,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:signature/signature.dart';
 import 'package:firexcode/firexcode.dart';
+import 'package:zoom_widget/zoom_widget.dart';
 import 'dart:math' as math;
 
 import 'modules/color_filter_generator.dart';
@@ -383,7 +384,6 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     },
                     title: 'Rotate right',
                   ),
-
                   BottomBarContainer(
                     colors: widget.bottomBarColor!,
                     icons: FontAwesomeIcons.eraser,
@@ -397,29 +397,30 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     },
                     title: 'Eraser',
                   ),
-
-                  // BottomBarContainer(
-                  //   colors: widget.bottomBarColor!,
-                  //   icons: FontAwesomeIcons.smile,
-                  //   ontap: () {
-                  //     var getemojis = showModalBottomSheet(
-                  //         context: context,
-                  //         builder: (BuildContext context) {
-                  //           return Emojies();
-                  //         });
-                  //     getemojis.then((value) {
-                  //       if (value['name'] != null) {
-                  //         type.add(1);
-                  //         widgetJson.add(value);
-                  //         //    fontsize.add(20);
-                  //         offsets.add(Offset.zero);
-                  //         //  multiwidget.add(value);
-                  //         howmuchwidgetis++;
-                  //       }
-                  //     });
-                  //   },
-                  //   title: 'Emoji',
-                  // ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor!,
+                    icons: FontAwesomeIcons.smile,
+                    ontap: () async {
+                      var getemojis = await showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Emojies();
+                          });
+                      if (getemojis != null) {
+                        print(getemojis);
+                        if (getemojis['name'] != null) {
+                          type.add(1);
+                          widgetJson.add(getemojis);
+                          //    fontsize.add(20);
+                          offsets.add(Offset.zero);
+                          //  multiwidget.add(value);
+                          howmuchwidgetis++;
+                        }
+                      }
+                      ;
+                    },
+                    title: 'Emoji',
+                  ),
                 ],
               ).xContainer(
                 padding: EdgeInsets.all(0.0),
