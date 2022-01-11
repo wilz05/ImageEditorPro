@@ -26,7 +26,10 @@ class _SlidersState extends State<Sliders> {
     return xColumnCC.list(
       [
         10.0.sizedHeight(),
-        'Size Adjust'.toUpperCase().xTextColorWhite().toCenter(),
+        Text(
+          'Size Adjust',
+          style: TextStyle(color: Colors.white),
+        ),
         Divider(
 
             // height: 1,

@@ -1,10 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_editor_pro/modules/sliders.dart';
@@ -34,14 +30,15 @@ var howmuchwidgetis = 0;
 //List multiwidget = [];
 Color currentcolors = Colors.white;
 var opicity = 0.0;
-SignatureController _controller = SignatureController(penStrokeWidth: 5, penColor: Colors.green);
+SignatureController _controller =
+    SignatureController(penStrokeWidth: 5, penColor: Colors.green);
 
 class ImageEditorPro extends StatefulWidget {
-   Color? appBarColor;
-   Color? bottomBarColor;
-   Directory? pathSave;
-   File? defaultImage;
-   double? pixelRatio;
+  Color? appBarColor;
+  Color? bottomBarColor;
+  Directory? pathSave;
+  File? defaultImage;
+  double? pixelRatio;
 
   ImageEditorPro({
     this.appBarColor,
@@ -66,7 +63,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   void changeColor(Color color) {
     setState(() => pickerColor = color);
     var points = _controller.points;
-    _controller = SignatureController(penStrokeWidth: 5, penColor: color, points: points);
+    _controller =
+        SignatureController(penStrokeWidth: 5, penColor: color, points: points);
   }
 
   List<Offset> offsets = [];
@@ -149,7 +147,12 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           transform: Matrix4.rotationY(flipValue),
                           child: ClipRect(
                             // <-- clips to the 200x200 [Container] below
-                          child: Center(child: Container(decoration: BoxDecoration(),child: Image.file(File(_image!.path),fit: BoxFit.cover),)),
+                            child: Center(
+                                child: Container(
+                              decoration: BoxDecoration(),
+                              child: Image.file(File(_image!.path),
+                                  fit: BoxFit.cover),
+                            )),
                             // child: _image!.path.decorationIFToFitHeight().xContainer(
                             //     padding: EdgeInsets.zero,
                             //     // alignment: Alignment.center,
@@ -181,13 +184,14 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                   Signat().xGesture(
                     onPanUpdate: (DragUpdateDetails details) {
                       setState(() {
-                        RenderBox? object = context.findRenderObject() as RenderBox?;
-                        var _localPosition = object!.globalToLocal(details.globalPosition);
+                        var object = context.findRenderObject() as RenderBox?;
+                        var _localPosition =
+                            object!.globalToLocal(details.globalPosition);
                         _points = List.from(_points)..add(_localPosition);
                       });
                     },
                     onPanEnd: (DragEndDetails details) {
-                      _points.add(null!);
+                      // _points.add(null!);
                     },
                   ).xContainer(padding: EdgeInsets.all(0.0)),
                   xStack.list(
@@ -206,8 +210,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               },
                               onpanupdate: (details) {
                                 setState(() {
-                                  offsets[f.key] =
-                                      Offset(offsets[f.key].dx + details.delta.dx, offsets[f.key].dy + details.delta.dy);
+                                  offsets[f.key] = Offset(
+                                      offsets[f.key].dx + details.delta.dx,
+                                      offsets[f.key].dy + details.delta.dy);
                                 });
                               },
                               mapJson: f.value,
@@ -218,10 +223,14 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   top: offsets[f.key].dy,
                                   ontap: () {
                                     showModalBottomSheet(
-                                        shape: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))
+                                        shape: BorderRadius.only(
+                                                topRight: Radius.circular(10),
+                                                topLeft: Radius.circular(10))
                                             .xShapeBorder(),
                                         context: context,
                                         builder: (context) {
+                                          print(
+                                              "my f key ${f.key} and value ${f.value}");
                                           return Sliders(
                                             index: f.key,
                                             mapValue: f.value,
@@ -230,8 +239,9 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                   },
                                   onpanupdate: (details) {
                                     setState(() {
-                                      offsets[f.key] =
-                                          Offset(offsets[f.key].dx + details.delta.dx, offsets[f.key].dy + details.delta.dy);
+                                      offsets[f.key] = Offset(
+                                          offsets[f.key].dx + details.delta.dx,
+                                          offsets[f.key].dy + details.delta.dy);
                                     });
                                   },
                                   mapJson: f.value,
@@ -257,16 +267,21 @@ class _ImageEditorProState extends State<ImageEditorPro> {
               _controller.points.clear();
               setState(() {});
             }),
-
             'Save'.text().xFlatButton(
                 primary: Colors.white,
                 onPressed: () {
-                  screenshotController.capture(pixelRatio: widget.pixelRatio ?? 1.5).then((binaryIntList) async {
+                  screenshotController
+                      .capture(pixelRatio: widget.pixelRatio ?? 1.5)
+                      .then((binaryIntList) async {
                     //print("Capture Done");
 
-                    final paths = widget.pathSave ?? await getTemporaryDirectory();
+                    final paths =
+                        widget.pathSave ?? await getTemporaryDirectory();
 
-                    final file = await File('${paths.path}/' + DateTime.now().toString() + '.jpg').create();
+                    final file = await File('${paths.path}/' +
+                            DateTime.now().toString() +
+                            '.jpg')
+                        .create();
                     file.writeAsBytesSync(binaryIntList!);
                     Navigator.pop(context, file);
                   }).catchError((onError) {
@@ -318,7 +333,10 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     colors: widget.bottomBarColor!,
                     icons: Icons.text_fields,
                     ontap: () async {
-                      var value = await Navigator.push(context, MaterialPageRoute(builder: (context) => TextEditorImage()));
+                      var value = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TextEditorImage()));
                       if (value['name'] == null) {
                         print('true');
                       } else {
@@ -333,16 +351,18 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     },
                     title: 'Text',
                   ),
-                  _image != null ? BottomBarContainer(
-                    colors: widget.bottomBarColor!,
-                    icons: Icons.flip,
-                    ontap: () {
-                      setState(() {
-                        flipValue = flipValue == 0 ? math.pi : 0;
-                      });
-                    },
-                    title: 'Flip',
-                  ) : Container(),
+                  _image != null
+                      ? BottomBarContainer(
+                          colors: widget.bottomBarColor!,
+                          icons: Icons.flip,
+                          ontap: () {
+                            setState(() {
+                              flipValue = flipValue == 0 ? math.pi : 0;
+                            });
+                          },
+                          title: 'Flip',
+                        )
+                      : Container(),
                   BottomBarContainer(
                     colors: widget.bottomBarColor!,
                     icons: Icons.rotate_left,
@@ -412,7 +432,8 @@ class _ImageEditorProState extends State<ImageEditorPro> {
   final picker = ImagePicker();
 
   Future<void> loadImage(File? imageFile) async {
-    final decodedImage = await decodeImageFromList(imageFile!.readAsBytesSync());
+    final decodedImage =
+        await decodeImageFromList(imageFile!.readAsBytesSync());
     setState(() {
       height = decodedImage.height;
       width = decodedImage.width;
@@ -455,15 +476,18 @@ class _SignatState extends State<Signat> {
 
 Widget imageFilterLatest({brightness, saturation, hue, child}) {
   return ColorFiltered(
-      colorFilter: ColorFilter.matrix(ColorFilterGenerator.brightnessAdjustMatrix(
+      colorFilter:
+          ColorFilter.matrix(ColorFilterGenerator.brightnessAdjustMatrix(
         value: brightness,
       )),
       child: ColorFiltered(
-          colorFilter: ColorFilter.matrix(ColorFilterGenerator.saturationAdjustMatrix(
+          colorFilter:
+              ColorFilter.matrix(ColorFilterGenerator.saturationAdjustMatrix(
             value: saturation,
           )),
           child: ColorFiltered(
-            colorFilter: ColorFilter.matrix(ColorFilterGenerator.hueAdjustMatrix(
+            colorFilter:
+                ColorFilter.matrix(ColorFilterGenerator.hueAdjustMatrix(
               value: hue,
             )),
             child: child,

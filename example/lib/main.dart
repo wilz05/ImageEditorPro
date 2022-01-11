@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_editor_pro/image_editor_pro.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firexcode/firexcode.dart';
@@ -24,7 +25,8 @@ class _HomePageState extends State<HomePage> {
   File? _defaultImage;
   File? _image;
 
-  Future<void> getimageditor() => Navigator.push(context, MaterialPageRoute(builder: (context) {
+  Future<void> getimageditor() =>
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
         return ImageEditorPro(
           appBarColor: Colors.black87,
           bottomBarColor: Colors.black87,
@@ -58,10 +60,12 @@ class _HomePageState extends State<HomePage> {
                   16.0.sizedHeight(),
                   'Set Default Image'.text().xRaisedButton(
                     onPressed: () async {
-                      final imageGallery = await ImagePicker().getImage(source: ImageSource.gallery);
+                      final imageGallery = await ImagePicker()
+                          .pickImage(source: ImageSource.gallery);
                       if (imageGallery != null) {
                         _defaultImage = File(imageGallery.path);
-                        setState(() => controllerDefaultImage.text = _defaultImage!.path);
+                        setState(() =>
+                            controllerDefaultImage.text = _defaultImage!.path);
                       }
                     },
                   ),
@@ -73,14 +77,22 @@ class _HomePageState extends State<HomePage> {
                 ])
                 .xCenter()
                 .xap(value: 16),
-            isFalse: _image == null ? Container() : Image.file(_image!).toCenter())
+            isFalse:
+                _image == null ? Container() : Image.file(_image!).toCenter())
         .xScaffold(
       floatingActionButton: Icons.add.xIcons().xFloationActiobButton(
-            color: Colors.red,
-            onTap: () {
-              // TODO: I don't know what I'm doing in here
-            },
-          ),
+          color: Colors.red,
+          onTap: () async {
+            print("hello world");
+            if (_image != null && _image?.path != null) {
+              print('saving in progress...');
+
+              await GallerySaver.saveImage(_image!.path, albumName: "alayamCMS")
+                  .then((bool? success) {
+                print('image saved!');
+              });
+            }
+          }),
     );
   }
 }

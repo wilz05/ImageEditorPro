@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/git/FireXcode-c733d727e67b78977af7be61973bd1bffd68f1e0" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.5" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.8" />
       <root url="file://$PROJECT_DIR$" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/git/FireXcode-fd1b3be0881808c19d0a0151d5d4d5fc88b4bd11" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.4" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.4" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.4" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.8" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.4" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.11" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+4" />
-      <root url="file://$PROJECT_DIR$/../../../../../src/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.3.0" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.5" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.11" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+4" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.3.0" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.5" />
+      <root url="file://$USER_HOME$/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.5" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
